@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+
+# 리액트 설정
+  frontend:
+    image: gengminy/ohzu-landing:main
+    container_name: frontend
+    ports:
+      - "3000:3000"
+
+
+# nginx 설정
+  nginx:
+    depends_on:
+      - frontend
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "80:80"
